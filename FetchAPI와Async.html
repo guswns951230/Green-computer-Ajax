@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>FetchAPI & Async</title>
+  </head>
+  <body>
+    <h1>FetchAPI를 이용한 비동기 자바스크립트(Ajax)</h1>
+    <!-- button을 눌렀을때, json의 object에 name과 adress 출력 -->
+    <button id="fetch-btn">fetchAPI button</button>
+    <p id="fetch-print"></p>
+    <script>
+      // button을 눌렀을때, json의 object에 name과 adress 출력
+      const fetchBtn = document.querySelector("#fetch-btn");
+      fetchBtn.addEventListener("click", function () {
+        fetch("./data.json")
+          .then((response) => response.json())
+          .then((jsonData) => {
+            const pTag = document.querySelector("#fetch-print");
+            pTag.innerHTML = `${jsonData.object.name}<br>${jsonData.object.adress}`;
+          });
+      });
+
+      // fetch는 promise 객체로 반환, 그 값을 then으로 받아 사용
+      console.log(fetch("./data.txt"));
+      // then 사용시 화살표 함수를 사용
+      fetch("./data.txt")
+        .then((presponse) => {
+          console.log(presponse);
+          // text()의 결과값이 promise객체
+          // then으로 풀어 사용하기 위해 return으로 전달
+          /*
+            promise 객체의 특징
+             : 한번 읽으면(변수로 호출) 그 값을 return하고 내용을 비운다
+          */
+          return presponse.text();
+        })
+        .then((ptext) => {
+          console.log(ptext);
+        });
+
+      // fetchAPI를 통해 data.json console에 출력
+      // json.parse를 통해 객체로 만ㄷ르어 출력
+      fetch("./data.json", { method: "GET" })
+        .then(
+          (rep) => rep.json() // rep객체의 json() 결과를 return으로 보냄
+        )
+        .then((jsonText) => console.log(jsonText));
+    </script>
+  </body>
+</html>
