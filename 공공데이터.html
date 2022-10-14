@@ -62,7 +62,7 @@
         const menuName = menuData.body[0].MENU_NM;
         const menuRe = menuData.body[0].RSTR_NM;
 
-        function menuTag() {
+        function menuTag(menuImg, menuName, menuRe) {
           // DOM 요소 만들어 추가하기.
           const menuImgTag = document.createElement("img");
           menuImgTag.src = menuImg;
